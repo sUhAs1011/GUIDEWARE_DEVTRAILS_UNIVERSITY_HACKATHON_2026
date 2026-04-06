@@ -57,7 +57,8 @@ def build_hgbr_feature_vector(
 ) -> list[float]:
     disruption_type = disruption.get("normalized_type", "")
     intensity_value = float(disruption.get("intensity_value", 0.0))
-    zone = str(disruption.get("zone", "")).strip()
+    rider_zone = str(rider_db_data.get("profile", {}).get("primary_zone", "")).strip()
+    zone = str(disruption.get("zone", "")).strip() or rider_zone
 
     zone_risk_index = derive_zone_risk_index(zone if zone else "UNKNOWN_ZONE")
     zone_baseline_risk = round(zone_risk_index / 10.0, 4)
@@ -68,6 +69,11 @@ def build_hgbr_feature_vector(
     historical_rain_mm = 25.0
     aqi_index = 90.0
     strike_intensity_index = 8.0
+
+    if "aqi" in disruption:
+        aqi_index = float(disruption.get("aqi", aqi_index))
+    if "strike_intensity" in disruption:
+        strike_intensity_index = float(disruption.get("strike_intensity", strike_intensity_index))
 
     if disruption_type == "EXTREME_WEATHER":
         historical_rain_mm = intensity_value
