@@ -1,139 +1,294 @@
-# ShiftGuard 🚀
+# 🛡️ ShiftGuard – AI-Powered Parametric Insurance for the Gig Economy
 
-Final hackathon prototype for an AI parametric insurance product tailored for the gig economy. Our platform provides automated loss-of-income coverage triggered by external disruptions such as extreme weather, severe pollution, and local strikes.
+ShiftGuard is an **AI-driven parametric insurance platform** designed to protect gig workers from temporary loss of income caused by external disruptions such as extreme weather, severe air pollution, and labor strikes.
 
-The product is city-agnostic by design. The current prototype demonstrates hyper-local pricing and claims automation using Bengaluru zone simulation data.
+Instead of requiring lengthy manual claims processing, ShiftGuard leverages **AI agents**, **dynamic risk pricing**, and **automated claims evaluation** to provide transparent, explainable, and near-instant insurance decisions.
 
-## Key Features
+Although the current prototype uses **Bengaluru** as its demonstration geography, the platform is designed to scale to any city through localized risk modeling.
 
-- Automated claims evaluation powered by LangGraph
-- AI advocate flow for appeals using Ollama / Llama 3
-- Bengaluru demo risk pulse dashboard with 12 simulated zones
-- Rider lifecycle management: signup, login, update, delete
-- Persistent earnings sync with Supabase
-- HGBR-driven weekly premium pricing with explanation
-- Claim activity timeline showing every evaluation attempt
-- Zone-aware disruption simulator with weather, pollution, fraud, and threshold-fail scenarios
+---
 
-## Coverage Scope
+# ✨ Features
 
-- Covers loss of income only from external disruptions
-- Weekly pricing basis only
-- Excludes health, life, accidents, and vehicle repairs
+* 🤖 AI-powered automated claim evaluation using LangGraph
+* ⚖️ Explainable AI appeal workflow powered by Llama 3
+* 📍 Hyper-local risk assessment across simulated city zones
+* 💰 Dynamic weekly premium calculation
+* 📊 Real-time risk dashboard and disruption simulator
+* 👤 Complete rider lifecycle management
+* 📝 Persistent earnings and policy management using Supabase
+* 📜 Claim activity timeline with full audit history
+* 🚨 Fraud detection and abuse prevention mechanisms
 
-## Persona Focus
+---
 
-- Food delivery partners
-- Swiggy / Zomato-style 2-wheeler delivery workers
-- Bengaluru is used as the demo geography, but the framework is designed to extend to other cities with localized zone inputs
+# 🏗️ System Architecture
 
-## Tech Stack
+ShiftGuard combines AI agents, machine learning, and parametric insurance principles into an end-to-end claims automation pipeline.
 
-### Backend
-- FastAPI
-- LangGraph
-- LangChain
-- Scikit-learn
-- Ollama
+## Workflow
 
-### Frontend
-- Next.js 15
-- Tailwind CSS
-- Lucide React
-
-### Database
-- Supabase PostgreSQL
-
-## Pricing and Risk Logic
-
-- Weekly premium is dynamically calculated using HGBR-based risk scoring
-- Pricing responds to hyper-local simulated factors such as rainfall, AQI, strike intensity, rider experience, and seasonal risk
-- Safer operational conditions reduce the weekly premium, while higher disruption risk pushes it upward
-
-## Fraud and Abuse Controls
-
-- Mock-location detection
-- Speed anomaly detection
-- One official claim per disruption type per week
-- Full claim-attempt audit trail
-- Manual review for very high-risk events
-
-## Pricing and Viability
-
-- Weekly premiums are bounded rather than open-ended
-- Pricing adjusts to hyper-local disruption signals such as rainfall, AQI, strike intensity, rider experience, and seasonal risk
-- Safer operating conditions reduce the weekly premium while higher-risk zones pay more
-- Payouts are tied to `incentive_at_risk`, which keeps compensation aligned to income disruption rather than unlimited replacement
-- Duplicate official claims are blocked and fraud screening reduces payout leakage
-
-## Configuration
-
-Create a root `.env` file:
-
-```env
-SUPABASE_URL="https://your-project-id.supabase.co"
-SUPABASE_SECRET_KEY="your-supabase-secret-key"
+```text id="hbln9g"
+Gig Worker
+     │
+     ▼
+Policy Enrollment
+     │
+     ▼
+Risk Pricing Engine
+     │
+     ▼
+Weekly Premium
+     │
+     ▼
+External Disruption
+(Weather / AQI / Strike)
+     │
+     ▼
+LangGraph Claim Agent
+     │
+     ├──────────────┐
+     ▼              ▼
+Fraud Checks   Eligibility Check
+     │              │
+     └──────┬───────┘
+            ▼
+Claim Decision
+            │
+            ▼
+Appeal Agent (LLM)
+            │
+            ▼
+Final Outcome
 ```
 
-Notes:
-- `SUPABASE_SECRET_KEY` is the preferred server-side key in this project.
-- `SUPABASE_SERVICE_ROLE_KEY` is also supported as a fallback by the backend config.
+---
 
-## Running the Project
+# 💼 Coverage
 
-### Backend
+ShiftGuard focuses exclusively on **income protection** for gig workers.
 
-```bash
+### Covered Events
+
+* 🌧️ Extreme weather disruptions
+* 🌫️ Severe air pollution
+* 🚧 Local strikes and public disruptions
+
+### Not Covered
+
+* Health insurance
+* Life insurance
+* Vehicle damage
+* Accident claims
+* Medical expenses
+
+The platform currently supports **weekly parametric insurance policies**.
+
+---
+
+# 👥 Target Users
+
+ShiftGuard is designed for workers whose income depends on daily operations, including:
+
+* 🍔 Food delivery partners
+* 🛵 Two-wheeler delivery executives
+* 🚚 Last-mile logistics workers
+* 📦 Gig economy delivery professionals
+
+While Bengaluru is used as the demonstration city, the architecture supports expansion to other regions using localized risk inputs.
+
+---
+
+# 🧠 AI Components
+
+## 📋 Claims Evaluation Agent
+
+Built using **LangGraph**, this agent automatically evaluates claims by analyzing disruption events, policy rules, and rider information.
+
+---
+
+## ⚖️ Appeal Agent
+
+Powered by **Llama 3 (Ollama)**, the appeal agent explains rejected claims and provides transparent reasoning for every decision.
+
+---
+
+## 📈 Risk Pricing Engine
+
+Calculates weekly insurance premiums using an **HGBR-based machine learning model** that considers:
+
+* Rainfall intensity
+* Air Quality Index (AQI)
+* Strike severity
+* Seasonal factors
+* Rider experience
+* Historical disruption patterns
+
+Premiums automatically adapt to local operating conditions.
+
+---
+
+# 🛡️ Fraud & Abuse Protection
+
+ShiftGuard incorporates multiple safeguards to reduce fraudulent claims.
+
+* GPS spoofing detection
+* Speed anomaly detection
+* Duplicate claim prevention
+* One official claim per disruption type per week
+* Complete claim audit trail
+* Manual review for high-risk scenarios
+
+---
+
+# 🛠️ Tech Stack
+
+| Category             | Technologies         |
+| -------------------- | -------------------- |
+| **Backend**          | FastAPI              |
+| **AI Framework**     | LangGraph, LangChain |
+| **Language Models**  | Ollama, Llama 3      |
+| **Machine Learning** | Scikit-learn (HGBR)  |
+| **Frontend**         | Next.js 15           |
+| **Styling**          | Tailwind CSS         |
+| **UI Components**    | Lucide React         |
+| **Database**         | Supabase PostgreSQL  |
+
+---
+
+# 🚀 Getting Started
+
+## Clone the Repository
+
+```bash id="b3qwb0"
+git clone <repository-url>
+cd <repository-folder>
+```
+
+---
+
+## Configure Environment
+
+Create a `.env` file:
+
+```env id="5kpaj9"
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SECRET_KEY=your_secret_key
+```
+
+---
+
+## Start the Backend
+
+```bash id="dmyqoq"
 cd backend
 pip install -r ../requirements.txt
 uvicorn orchestrator.main:app --reload
 ```
 
-Backend API: `http://localhost:8000`
+Backend runs at:
 
-### Frontend
+```text id="jlwm9i"
+http://localhost:8000
+```
 
-```bash
+---
+
+## Start the Frontend
+
+```bash id="sg0q4v"
 cd frontend
 npm install
 npm run dev
 ```
 
-Frontend app: `http://localhost:3000`
+Frontend runs at:
 
-### LLM Engine
+```text id="0b9jpc"
+http://localhost:3000
+```
 
-```bash
+---
+
+## Start the LLM
+
+```bash id="t8qjy0"
 ollama run llama3
 ```
 
-## Supabase Setup
+---
 
-Run these SQL files in Supabase SQL Editor:
+## Configure Supabase
+
+Run the following SQL scripts inside the Supabase SQL Editor:
 
 1. `supabase/schema_hackathon.sql`
 2. `supabase/claim_attempts.sql`
 
-## Demo Flow
+---
 
-1. Login as `RIDER_8023` or sign up a new rider
-2. Refresh the premium quote and open the premium breakdown modal
-3. Open `Coverage Info` and `Fraud & Abuse Controls` to show explicit insurance scope and adversarial-defense logic
-4. Trigger approved / denied / fraud scenarios from the simulator:
-   - Extreme Rain
-   - Severe Pollution
-   - Clear Weather
-   - GPS Spoofing
-5. Review the Claim Activity section to see every attempt recorded
-6. Use the appeal flow for rejected cases
+# 🎬 Demo Workflow
 
-## Project Structure
+1. Sign up or log in as a rider.
+2. Generate a personalized weekly insurance quote.
+3. View the premium breakdown and risk explanation.
+4. Simulate disruption events such as:
 
-- `backend/`: FastAPI backend, orchestration, ML pricing engine
-- `frontend/`: Next.js dashboard and simulator
-- `supabase/`: SQL setup files
-- `AGENTS.md`: project handoff and continuity notes
+   * 🌧️ Extreme Rain
+   * 🌫️ Severe Pollution
+   * ☀️ Clear Weather
+   * 📍 GPS Spoofing
+5. Review claim history and audit logs.
+6. Submit an appeal for rejected claims.
+7. Observe AI-generated explanations and final decisions.
 
-## License
+---
 
-Built for hackathon purposes by the DevTrails team.
+# 📂 Project Structure
+
+```text id="v4um86"
+backend/
+├── AI Agents
+├── Claim Orchestration
+├── Pricing Engine
+
+frontend/
+├── Next.js Dashboard
+├── Risk Simulator
+├── Claim Interface
+
+supabase/
+├── Database Schema
+├── Claim Tables
+
+AGENTS.md
+```
+
+---
+
+# 🚀 Future Roadmap
+
+* Live weather API integration
+* Real-time AQI monitoring
+* Multi-city deployment
+* Mobile application
+* Blockchain-based claim verification
+* Personalized insurance recommendations
+* Reinforcement learning for dynamic pricing
+* Integration with payment gateways
+
+---
+
+# 🏆 Hackathon Project
+
+ShiftGuard was developed as a hackathon project to demonstrate how **Artificial Intelligence**, **Machine Learning**, and **Parametric Insurance** can work together to provide fast, transparent, and automated financial protection for gig economy workers.
+
+---
+
+# 📄 License
+
+This project was developed for hackathon purposes by the **DevTrails Team**.
+
+---
+
+⭐ If you found this project interesting, consider giving the repository a star!
