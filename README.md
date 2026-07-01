@@ -282,13 +282,3 @@ AGENTS.md
 # 🏆 Hackathon Project
 
 ShiftGuard was developed as a hackathon project to demonstrate how **Artificial Intelligence**, **Machine Learning**, and **Parametric Insurance** can work together to provide fast, transparent, and automated financial protection for gig economy workers.
-
----
-
-# 📄 License
-
-This project was developed for hackathon purposes by the **DevTrails Team**.
-
----
-
-⭐ If you found this project interesting, consider giving the repository a star!
